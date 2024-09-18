@@ -90,16 +90,18 @@ def depthFirstSearch(problem):
     
     frontier = util.Stack()
     start = [problem.getStartState(), 0, []]
-    expandedNodes = []
+    expanded_nodes = []
 
     frontier.push(start)
     while not frontier.isEmpty():
         [current, cost, path] = frontier.pop()
         if problem.isGoalState(current):
             return path
-        if not current in expandedNodes:
-            expandedNodes.append(current)
-            for successor, action, step_cost in problem.getSuccessors(current):
+        if not current in expanded_nodes:
+            expanded_nodes.append(current)
+            successors = problem.getSuccessors(current)
+            for next in successors:
+                successor, action, step_cost = next[0], next[1], next[2]
                 successor_cost = cost + step_cost
                 successor_path = path + [action]
                 frontier.push([successor, successor_cost, successor_path])
@@ -111,16 +113,17 @@ def breadthFirstSearch(problem):
     "*** YOUR CODE HERE ***"
     frontier = util.Queue()
     start = [problem.getStartState(), 0, []]
-    expandedNodes = []
+    expanded_nodes = []
 
     frontier.push(start)
     while not frontier.isEmpty():
         [current, cost, path] = frontier.pop()
         if problem.isGoalState(current):
             return path
-        if not current in expandedNodes:
-            expandedNodes.append(current)
-            for successor, action, step_cost in problem.getSuccessors(current):
+        if not current in expanded_nodes:
+            successors = problem.getSuccessors(current)
+            for next in successors:
+                successor, action, step_cost = next[0], next[1], next[2]
                 successor_cost = cost + step_cost
                 successor_path = path + [action]
                 frontier.push([successor, successor_cost, successor_path])
@@ -131,16 +134,18 @@ def uniformCostSearch(problem):
     "*** YOUR CODE HERE ***"
     frontier = util.PriorityQueue()
     start = [problem.getStartState(), 0, []]
-    expandedNodes = []
+    expanded_nodes = []
 
     frontier.push(start, 0)
     while not frontier.isEmpty():
         [current, cost, path] = frontier.pop()
         if problem.isGoalState(current):
             return path
-        if not current in expandedNodes:
-            expandedNodes.append(current)
-            for successor, action, step_cost in problem.getSuccessors(current):
+        if not current in expanded_nodes:
+            expanded_nodes.append(current)
+            successors = problem.getSuccessors(current)
+            for next in successors:
+                successor, action, step_cost = next[0], next[1], next[2]
                 successor_cost = cost + step_cost
                 successor_path = path + [action]
                 frontier.update([successor, successor_cost, successor_path], successor_path)
@@ -158,16 +163,18 @@ def aStarSearch(problem, heuristic=nullHeuristic):
     "*** YOUR CODE HERE ***"
     frontier = util.PriorityQueue()
     start = [problem.getStartState(), 0, []]
-    expandedNodes = []
+    expanded_nodes = []
 
     frontier.push(start, 0)
     while not frontier.isEmpty():
         [current, cost, path] = frontier.pop()
         if problem.isGoalState(current):
             return path
-        if not current in expandedNodes:
-            expandedNodes.append(current)
-            for successor, action, step_cost in problem.getSuccessors(current):
+        if not current in expanded_nodes:
+            expanded_nodes.append(current)
+            successors = problem.getSuccessors(current)
+            for next in successors:
+                successor, action, step_cost = next[0], next[1], next[2]
                 successor_cost = cost + step_cost
                 successor_path = path + [action]
                 frontier.update([successor, successor_cost, successor_path], successor_cost + heuristic(successor, problem))

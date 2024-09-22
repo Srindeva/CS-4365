@@ -106,7 +106,6 @@ def depthFirstSearch(problem):
                 successor_path = path + [action]
                 frontier.push([successor, successor_cost, successor_path])
 
-    #util.raiseNotDefined()"
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
@@ -120,14 +119,14 @@ def breadthFirstSearch(problem):
         [current, cost, path] = frontier.pop()
         if problem.isGoalState(current):
             return path
-        if not current in expanded_nodes:
+        if current not in expanded_nodes:
+            expanded_nodes.append(current)
             successors = problem.getSuccessors(current)
             for next in successors:
                 successor, action, step_cost = next[0], next[1], next[2]
                 successor_cost = cost + step_cost
                 successor_path = path + [action]
                 frontier.push([successor, successor_cost, successor_path])
-    #util.raiseNotDefined()
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
@@ -148,8 +147,7 @@ def uniformCostSearch(problem):
                 successor, action, step_cost = next[0], next[1], next[2]
                 successor_cost = cost + step_cost
                 successor_path = path + [action]
-                frontier.update([successor, successor_cost, successor_path], successor_path)
-    #util.raiseNotDefined()
+                frontier.update([successor, successor_cost, successor_path], successor_cost)
 
 def nullHeuristic(state, problem=None):
     """
@@ -178,8 +176,6 @@ def aStarSearch(problem, heuristic=nullHeuristic):
                 successor_cost = cost + step_cost
                 successor_path = path + [action]
                 frontier.update([successor, successor_cost, successor_path], successor_cost + heuristic(successor, problem))
-
-    #util.raiseNotDefined()
 
 
 # Abbreviations

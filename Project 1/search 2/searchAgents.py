@@ -288,7 +288,7 @@ class CornersProblem(search.SearchProblem):
         # Please add any code here which you would like to use
         # in initializing the problem
         "*** YOUR CODE HERE ***"
-        self.startingState = startingGameState
+        self.startingGameState = startingGameState
     def getStartState(self):
         """
         Returns the start state (in your state space, not the full Pacman state
@@ -389,7 +389,7 @@ def cornersHeuristic(state, problem):
     
     h_value = [0]
     for corner in unvisited_corners:
-        distance = util.manhattanDistance(current_position, corner)
+        distance = mazeDistance(current_position, corner, problem.startingGameState)
         h_value.append(distance)
     return max(h_value)
 

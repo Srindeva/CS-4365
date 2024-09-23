@@ -301,11 +301,10 @@ class CornersProblem(search.SearchProblem):
         Returns whether this search state is a goal state of the problem.
         """
         current_position, visited_corners = state
-        if current_position in self.corners:
-            if not current_position in visited_corners:
-                visited_corners.append(current_position)
-            return len(visited_corners) == 4
-        return False
+        if current_position in self.corners and current_position not in visited_corners:
+            visited_corners.append(current_position)
+        
+        return len(visited_corners) == 4
 
     def getSuccessors(self, state):
         """

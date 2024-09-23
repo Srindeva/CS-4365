@@ -287,21 +287,19 @@ class CornersProblem(search.SearchProblem):
         self._expanded = 0 # DO NOT CHANGE; Number of search nodes expanded
         # Please add any code here which you would like to use
         # in initializing the problem
-        "*** YOUR CODE HERE ***"
+
         self.startingGameState = startingGameState
     def getStartState(self):
         """
         Returns the start state (in your state space, not the full Pacman state
         space)
         """
-        "*** YOUR CODE HERE ***"
         return (self.startingPosition, [])
 
     def isGoalState(self, state):
         """
         Returns whether this search state is a goal state of the problem.
         """
-        "*** YOUR CODE HERE ***"
         current_position, visited_corners = state
         if current_position in self.corners:
             if not current_position in visited_corners:
@@ -376,7 +374,6 @@ def cornersHeuristic(state, problem):
     corners = problem.corners # These are the corner coordinates
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
 
-    "*** YOUR CODE HERE ***"
     current_position, visited_corners = state
     unvisited_corners = []
     
@@ -484,7 +481,6 @@ def foodHeuristic(state, problem):
     problem.heuristicInfo['wallCount']
     """
     position, foodGrid = state
-    "*** YOUR CODE HERE ***"
     food_coordinates = foodGrid.asList()
     problem.heuristicInfo['wallCount'] = problem.walls.count()
     
@@ -563,7 +559,6 @@ class AnyFoodSearchProblem(PositionSearchProblem):
         """
         x,y = state
 
-        "*** YOUR CODE HERE ***"
         return state in self.food.asList()
 
 def mazeDistance(point1, point2, gameState):
